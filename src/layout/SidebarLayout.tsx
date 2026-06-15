@@ -78,7 +78,7 @@ export function Sidebar({ isOpen, toogle }: { isOpen: boolean; toogle: () => voi
 
   return (
     <div
-      className={`inset-0 bg-neutral-900/80 fixed ${isOpen ? 'opacity-100' : 'opacity-0 pointer-events-none'} transition-opacity duration-200`}
+      className={`inset-0 bg-neutral-900/80 z-50 fixed ${isOpen ? 'opacity-100' : 'opacity-0 pointer-events-none'} transition-opacity duration-200`}
     >
       <div className='absolute inset-y-0 right-0 w-65 bg-[#EAEAEA]  flex flex-col'>
         <button

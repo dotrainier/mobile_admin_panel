@@ -204,7 +204,7 @@ function AddMerchant({
   const isDisable = !merchantValue.name || !merchantValue.category || !merchantValue.distance;
 
   return (
-    <div className='inset-0 bg-[#EAEAEA] fixed'>
+    <div className='inset-0 bg-[#EAEAEA] fixed z-50'>
       <div className='size-4 absolute right-2 top-2 text-gray-700' onClick={close}>
         <svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 20 20'>
           <path
