@@ -1,5 +1,5 @@
 import { PlusIcon, SearchIcon } from '../components/svg-icons';
-import { useState, useMemo } from 'react';
+import { useState, useMemo, useEffect } from 'react';
 
 const initialData = [
   {
@@ -60,6 +60,21 @@ export default function Merchants() {
   const [searchValue, setSearchValue] = useState('');
   const [openAddModal, setOpenAddModal] = useState(false);
   const [merchantsData, setMerchantsData] = useState<Merchant[]>(initialData);
+
+  useEffect(() => {
+    async function fetchData() {
+      try {
+        const result = await fetch('https://dapdash.onrender.com/api/merchants/all');
+        const data = await result.json();
+
+        console.log('API DATA: ', data);
+      } catch {
+        console.error('API ERROR');
+      }
+    }
+
+    fetchData();
+  }, []);
 
   const merchants = useMemo(() => {
     if (!searchValue) return merchantsData;
