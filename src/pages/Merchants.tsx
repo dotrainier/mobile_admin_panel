@@ -11,6 +11,7 @@ import {
 import { useState, useMemo, useEffect } from 'react';
 import { useFetch } from '../hooks/useFetch';
 import { useMutation } from '../hooks/useMutation';
+import { toast } from 'sonner';
 
 interface Merchant {
   id: number;
@@ -270,6 +271,10 @@ function AddMerchantModal({
   const [form, setForm] = useState({ name: '', email: '', phone: '', address: '' });
   const { mutate, loading, error } = useMutation<Merchant>();
 
+  useEffect(() => {
+    if (error) toast.error(error.message);
+  }, [error]);
+
   const handleChange = (key: string, value: string) =>
     setForm((prev) => ({ ...prev, [key]: value }));
 
@@ -277,6 +282,7 @@ function AddMerchantModal({
     e.preventDefault();
     const result = await mutate('POST', 'https://dapdash.onrender.com/api/merchants/add', form);
     if (result !== undefined) {
+      toast.success('Merchant added successfully');
       onAdd(result);
       close();
     }
@@ -366,8 +372,6 @@ function AddMerchantModal({
             />
           </div>
 
-          {error && <p className='text-xs text-red-500 text-center'>{error.message}</p>}
-
           <div className='flex gap-3 pt-2'>
             <button
               type='button'
@@ -455,6 +459,10 @@ function EditMerchantModal({
   });
   const { mutate, loading, error } = useMutation<Merchant>();
 
+  useEffect(() => {
+    if (error) toast.error(error.message);
+  }, [error]);
+
   const handleChange = (key: string, value: string) =>
     setForm((prev) => ({ ...prev, [key]: value }));
 
@@ -466,6 +474,7 @@ function EditMerchantModal({
       form,
     );
     if (result !== undefined) {
+      toast.success('Merchant updated successfully');
       onEdit(result);
       close();
     }
@@ -551,8 +560,6 @@ function EditMerchantModal({
             />
           </div>
 
-          {error && <p className='text-xs text-red-500 text-center'>{error.message}</p>}
-
           <div className='flex gap-3 pt-2'>
             <button
               type='button'
@@ -586,12 +593,17 @@ function DeleteMerchantModal({
 }) {
   const { mutate, loading, error } = useMutation<{ message: string }>();
 
+  useEffect(() => {
+    if (error) toast.error(error.message);
+  }, [error]);
+
   const handleDelete = async () => {
     const result = await mutate(
       'DELETE',
       `https://dapdash.onrender.com/api/merchants/delete/${merchant.id}`,
     );
     if (result !== undefined) {
+      toast.success('Merchant deleted successfully');
       onDelete(merchant.id);
       close();
     }
@@ -611,7 +623,6 @@ function DeleteMerchantModal({
             cannot be undone.
           </p>
         </div>
-        {error && <p className='text-xs text-red-500 text-center px-4 pt-3'>{error.message}</p>}
         <div className='px-4 py-4 flex gap-3'>
           <button
             type='button'

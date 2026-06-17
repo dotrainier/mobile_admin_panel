@@ -17,10 +17,19 @@ export function useMutation<T = unknown>() {
         body: body ? JSON.stringify(body) : undefined,
       });
       if (!res.ok) throw new Error(`HTTP ${res.status}`);
-      const json = await res.json() as T;
-      setData(json);
-      return json;
+
+      //TEMPORARY REMOVE SINCE DELETE METHOD RETURN PLAIN TEXT
+      // const json = (await res.json()) as T;
+      // setData(json);
+      // return json;
+
+      //TEMPORARY USED TO HANDLE PLAIN TEXT RESPONSE
+      const type = res.headers.get('content-type');
+      const data = type?.includes('application/json') ? await res.json() : await res.text();
+      setData(data as T);
+      return data as T;
     } catch (err) {
+      console.log('errrr:', err);
       setError(err as Error);
     } finally {
       setLoading(false);
