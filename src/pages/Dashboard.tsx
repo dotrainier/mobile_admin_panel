@@ -18,7 +18,7 @@ export default function Dashboard() {
               </div>
 
               <div className='size-8 bg-gray-300 p-1.5 text-violet-600 rounded-md'>
-                <StoreIcon />
+                <StoreIcon className='size-full' />
               </div>
             </div>
 
@@ -29,7 +29,7 @@ export default function Dashboard() {
               </div>
 
               <div className='size-8 bg-blue-100 p-1.5 text-blue-500 rounded-md'>
-                <ProductIcon />
+                <ProductIcon className='size-full' />
               </div>
             </div>
 
@@ -40,7 +40,7 @@ export default function Dashboard() {
               </div>
 
               <div className='size-8 bg-green-50 p-1.5 text-green-700 rounded-md'>
-                <CartIcon />
+                <CartIcon className='size-full' />
               </div>
             </div>
           </div>

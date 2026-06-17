@@ -3,3 +3,42 @@
 * {
   font-family: 'Inter', sans-serif;
 }
+
+@layer components {
+  .btn {
+    @apply inline-flex items-center justify-center gap-2
+           font-medium rounded-lg
+           transition-colors duration-150
+           focus:outline-none focus:ring-2 focus:ring-offset-2
+           disabled:opacity-50 disabled:pointer-events-none
+           active:scale-95;
+  }
+
+  .input {
+    @apply block rounded-lg border bg-transparent
+           transition-colors duration-150
+           focus:outline-none focus:ring-2
+           disabled:opacity-50 disabled:bg-gray-50
+           placeholder:text-gray-400;
+  }
+
+  .select {
+    @apply block rounded-lg border bg-white
+           transition-colors duration-150
+           focus:outline-none focus:ring-2
+           disabled:opacity-50 disabled:bg-gray-50
+           appearance-none cursor-pointer;
+  }
+
+  .badge {
+    @apply inline-flex items-center rounded-full font-medium;
+  }
+
+  .label {
+    @apply block text-sm font-medium mb-1;
+  }
+
+  .field {
+    @apply flex flex-col gap-1;
+  }
+}
